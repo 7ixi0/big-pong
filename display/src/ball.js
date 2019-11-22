@@ -79,7 +79,5 @@ export class Ball {
     ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
     ctx.closePath();
     ctx.fill();
-
-    ctx.fillRect(this.x, this.y, this.r, this.r);
   }
 }
