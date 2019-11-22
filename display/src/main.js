@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
-import { resizeCanvas } from "./util";
+import { resizeCanvas, map } from "./util";
 import { Ball } from "./ball";
-import { Paddle } from "./paddle";
+import { Paddle, paddleSize } from "./paddle";
 
 const socket = io('localhost:3000/display');
 socket.on('connect', () => console.log('Connesso al server!'));
@@ -49,7 +49,8 @@ function render() {
 }
 
 socket.on('movePaddle', ({ side, position }) => {
-  const pos = position * gameScreen.height;
+  console.log('ricevuta posizione', side, position);
+  const pos = map(position, 0, 1, paddleSize.h / 2, gameScreen.height - paddleSize.h / 2);
   switch (side) {
     case 'left':
       leftPaddle.setPosition(pos);

@@ -1,7 +1,7 @@
 import { limit } from "./util";
 import { gameScreen } from "./main";
 
-const paddleSize = {
+export const paddleSize = {
   w: 50,
   h: 300,
 };
