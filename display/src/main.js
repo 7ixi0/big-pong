@@ -1,6 +1,10 @@
+import io from 'socket.io-client';
 import { resizeCanvas } from "./util";
 import { Ball } from "./ball";
 import { Paddle } from "./paddle";
+
+const socket = io('localhost:3000/display');
+socket.on('connect', () => console.log('Connesso al server!'));
 
 // Creao canvas e context
 const canvas = document.createElement('canvas');
@@ -44,12 +48,17 @@ function render() {
   ball.render(ctx);
 }
 
-// muove palette in base al mouse
-canvas.addEventListener('mousemove', e => {
-  const rect = canvas.getBoundingClientRect();
-  const pos = e.clientY - rect.top;
-  leftPaddle.setPosition(pos);
-  rightPaddle.setPosition(pos);
+socket.on('movePaddle', ({ side, position }) => {
+  const pos = position * gameScreen.height;
+  switch (side) {
+    case 'left':
+      leftPaddle.setPosition(pos);
+      break;
+
+    case 'right':
+      rightPaddle.setPosition(pos);
+      break;
+  }
 });
 
 function gameLoop(time = 0) {
