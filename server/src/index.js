@@ -16,7 +16,7 @@ clients.on('connect', socket => {
   // position è la posizione a cui spostare il paletto, normalizzata (da 0 a 1)
   socket.on('movePaddle', (data) => {
     console.log(data);
-    display.emit('movePaddle', data)
+    display.volatile.emit('movePaddle', data)
   });
 });
 
