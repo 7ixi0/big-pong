@@ -4,12 +4,29 @@ const GameQueue = require('./gameQueue');
 const gameQueue = new GameQueue(io);
 gameQueue.on('newPlayer', () => console.log(`${gameQueue.lenght} giocatori connessi`));
 
+const endGame = (data) => {
+  io.to('playing').volatile.emit('endGame', data);
+  io.to('playing').clients((err, clients) => {
+    if (err) return;
+    clients.forEach(id => {
+      const client = io.sockets.connected[id];
+      if (client) client.disconnect(true);
+    });
+  });
+  gameQueue.endGame();
+};
+
 io.on('connect', socket => {
   console.log('Socket connesso!');
 
   const registerDisplay = () => {
     console.log('Display registrato!');
     socket.join('display');
+
+    socket.on('endGame', data => {
+      console.log('> endGame', data);
+      endGame(data);
+    });
   };
 
   const registerPlayer = () => {
@@ -58,7 +75,7 @@ gameQueue.on('gameReady', ([player1, player2]) => {
   const abort = () => {
     leave(player1);
     leave(player2);
-    gameQueue.abortGame();
+    gameQueue.endGame();
   };
 
   const setup = player => {

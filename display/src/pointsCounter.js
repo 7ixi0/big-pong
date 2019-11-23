@@ -1,4 +1,5 @@
 import { gameScreen } from "./main";
+import { socket } from "./socket";
 
 export class PointsCounter {
   constructor(winPoins = 3) {
@@ -22,16 +23,22 @@ export class PointsCounter {
   }
 
   checkWin() {
-    if (this.leftPoints >= this.winPoins) {
-      this.reset();
-      return 'left';
-    }
-    if (this.rightPoints >= this.winPoins) {
-      this.reset();
-      return 'right';
-    }
+    let winner = '';
+    if (this.leftPoints >= this.winPoins)
+      winner = 'left';
+    if (this.rightPoints >= this.winPoins)
+      winner = 'right';
+    if (!winner) return;
 
-    return null;
+    console.log('vittoria', winner);
+    socket.emit('endGame', {
+      winner,
+      points: {
+        left: this.leftPoints,
+        right: this.rightPoints,
+      },
+    });
+    this.reset();
   }
 
   render(ctx) {

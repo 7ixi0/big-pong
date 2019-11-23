@@ -30,7 +30,7 @@ module.exports = class GameQueue extends EventEmitter {
     }
   }
 
-  abortGame() {
+  endGame() {
     this.gameRunning = false;
     this.emit('gameEnded');
 

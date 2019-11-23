@@ -1,17 +1,9 @@
-import io from 'socket.io-client';
+import { socket } from "./socket";
 import { resizeCanvas, map } from "./util";
 import { Ball } from "./ball";
 import { Paddle, paddleSize } from "./paddle";
 import { MiddleLine } from './middleLine';
 import { PointsCounter } from './pointsCounter';
-
-const socket = io('localhost:3000');
-socket.on('connect', () => {
-  socket.emit('join', {
-    role: 'display',
-  });
-  console.log('Connesso al server!');
-});
 
 // Creao canvas e context
 const canvas = document.createElement('canvas');
@@ -50,10 +42,7 @@ function update() {
   if (ball.checkLeftWall())
     counter.scoreRight();
 
-  const winner = counter.checkWin();
-  if (winner !== null) {
-    console.log(`Ha vinto: ${winner} `);
-  }
+  counter.checkWin();
 }
 
 // loop per renderizzare il gioco nello statao corrente
