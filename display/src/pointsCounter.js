@@ -1,5 +1,4 @@
 import { gameScreen } from "./main";
-import { socket } from "./socket";
 
 export class PointsCounter {
   constructor(winPoins = 3) {
