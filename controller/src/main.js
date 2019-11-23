@@ -5,6 +5,8 @@ const socket = io('localhost:3000/client');
 socket.on('connect', () => console.log('Connesso al server!'));
 
 const slider = document.querySelector('input');
+const select = document.querySelector('select');
+
 let lastPos = 0;
 
 setInterval(() => {
@@ -14,7 +16,7 @@ setInterval(() => {
 
   console.log('invio posizione', position);
   socket.emit('movePaddle', {
-    side: 'left',
+    side: select.value,
     position,
   });
 }, 100);
