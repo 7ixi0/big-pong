@@ -3,8 +3,13 @@ import { resizeCanvas, map } from "./util";
 import { Ball } from "./ball";
 import { Paddle, paddleSize } from "./paddle";
 
-const socket = io('localhost:3000/display');
-socket.on('connect', () => console.log('Connesso al server!'));
+const socket = io('localhost:3000');
+socket.on('connect', () => {
+  socket.emit('join', {
+    role: 'display',
+  });
+  console.log('Connesso al server!');
+});
 
 // Creao canvas e context
 const canvas = document.createElement('canvas');
