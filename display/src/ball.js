@@ -52,21 +52,28 @@ export class Ball {
     this.y = gameScreen.height / 2;
   }
 
-  checkBounds() {
+  checkTopBottomWalls() {
     if (this.y < 0 + this.r || this.y > gameScreen.height - this.r) {
       this.ySpeed = -this.ySpeed;
-      console.log(this.ySFpeed);
     }
+  }
 
+  checkRightWall() {
     if (this.x - this.r > gameScreen.width) {
       this.reset();
-      console.log('punto left!');
+      return true;
     }
 
+    return false;
+  }
+
+  checkLeftWall() {
     if (this.x + this.r < 0) {
       this.reset();
-      console.log('punto right!');
+      return true;
     }
+
+    return false;
   }
 
   update() {
