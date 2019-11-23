@@ -74,8 +74,15 @@ function render() {
     ctx.fillStyle = '#D00';
     ctx.fillText('NON CONNESSO!', gameScreen.width / 2, gameScreen.height / 2);
   } else if (!gameStatus.gameRuninng) {
-    ctx.fillStyle = '#DD0';
+    ctx.fillStyle = '#0DD';
     ctx.fillText('Attesa di giocatori', gameScreen.width / 2, gameScreen.height / 2);
+
+    if (gameStatus.lastWinner) {
+      const side = gameStatus.lastWinner === 'left' ? 'sinistra' : 'destra';
+      ctx.font = '45px Monospace';
+      ctx.fillStyle = '#0D0'
+      ctx.fillText(`Ha vinto il giocatore a ${side}`, gameScreen.width / 2, gameScreen.height / 2 - 100);
+    }
   }
 }
 
