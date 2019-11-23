@@ -74,6 +74,10 @@ function render() {
   rightPaddle.render(ctx);
   ball.render(ctx);
   counter.render(ctx);
+
+  if (socket.disconnected) {
+    ctx.fillText('NON CONNESSO!', gameScreen.width / 2, gameScreen.height / 2);
+  }
 }
 
 socket.on('movePaddle', ({ side, position }) => {
