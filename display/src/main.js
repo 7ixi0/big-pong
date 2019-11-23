@@ -2,6 +2,7 @@ import io from 'socket.io-client';
 import { resizeCanvas, map } from "./util";
 import { Ball } from "./ball";
 import { Paddle, paddleSize } from "./paddle";
+import { MiddleLine } from './middleLine';
 
 const socket = io('localhost:3000');
 socket.on('connect', () => {
@@ -31,6 +32,7 @@ resizeCanvas(ctx, gameScreen);
 const leftPaddle = new Paddle(50, 50);
 const rightPaddle = new Paddle(gameScreen.width - 50, 50);
 const ball = new Ball(gameScreen.width / 2, gameScreen.height / 2);
+const middleLine = new MiddleLine();
 
 // loop per aggiornare lo stato di gioco
 function update() {
@@ -48,6 +50,9 @@ function render() {
 
   // Rendring
   ctx.fillStyle = '#fff';
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 10;
+  middleLine.render(ctx);
   leftPaddle.render(ctx);
   rightPaddle.render(ctx);
   ball.render(ctx);
