@@ -4,8 +4,9 @@ import { Ball } from "./ball";
 import { Paddle, paddleSize } from "./paddle";
 import { MiddleLine } from './middleLine';
 import { PointsCounter } from './pointsCounter';
+import { GameStatus } from "./gameStatus";
 
-// Creao canvas e context
+// Crea canvas e context
 const canvas = document.createElement('canvas');
 document.body.appendChild(canvas);
 const ctx = canvas.getContext('2d');
@@ -26,6 +27,8 @@ const leftPaddle = new Paddle(50, 50);
 const rightPaddle = new Paddle(gameScreen.width - 50, 50);
 const ball = new Ball(gameScreen.width / 2, gameScreen.height / 2);
 const middleLine = new MiddleLine();
+
+const gameStatus = new GameStatus();
 const counter = new PointsCounter();
 
 // loop per aggiornare lo stato di gioco
@@ -42,7 +45,10 @@ function update() {
   if (ball.checkLeftWall())
     counter.scoreRight();
 
-  counter.checkWin();
+  const winData = counter.checkWin();
+  if (winData) {
+    gameStatus.endGame(winData);
+  }
 }
 
 // loop per renderizzare il gioco nello statao corrente
@@ -65,7 +71,11 @@ function render() {
   counter.render(ctx);
 
   if (socket.disconnected) {
+    ctx.fillStyle = '#D00';
     ctx.fillText('NON CONNESSO!', gameScreen.width / 2, gameScreen.height / 2);
+  } else if (!gameStatus.gameRuninng) {
+    ctx.fillStyle = '#DD0';
+    ctx.fillText('Attesa di giocatori', gameScreen.width / 2, gameScreen.height / 2);
   }
 }
 
@@ -85,7 +95,8 @@ socket.on('movePaddle', ({ side, position }) => {
 
 function gameLoop(time = 0) {
   requestAnimationFrame(gameLoop);
-  update();
+  if (gameStatus.gameRuninng)
+    update();
   render();
 }
 requestAnimationFrame(gameLoop);

@@ -31,14 +31,14 @@ export class PointsCounter {
     if (!winner) return;
 
     console.log('vittoria', winner);
-    socket.emit('endGame', {
+    this.reset();
+    return {
       winner,
       points: {
         left: this.leftPoints,
         right: this.rightPoints,
       },
-    });
-    this.reset();
+    };
   }
 
   render(ctx) {

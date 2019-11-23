@@ -89,6 +89,7 @@ gameQueue.on('gameReady', ([player1, player2]) => {
 
   setup(player1);
   setup(player2);
+  io.to('display').emit('startGame');
 });
 
 io.listen(3000);
