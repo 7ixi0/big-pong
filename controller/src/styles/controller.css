@@ -1,0 +1,43 @@
+/* gira lo slider in verticale */
+input[type=range][orient=vertical] {
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* WebKit */
+}
+
+p.controller-side {
+  font-size: 2em;
+  margin: 0;
+  margin-top: 0.75em;
+  padding: 0;
+}
+
+p.controller-side.left {
+  text-align: left;
+}
+
+p.controller-side.right {
+  text-align: right;
+}
+
+.controller {
+  margin: 0.5em 0;
+  padding: 0;
+  width: 100%;
+  height: 70%;
+
+  display: flex;
+  align-items: center;
+}
+
+.controller.left {
+  flex-direction: row;
+}
+
+.controller.right {
+  flex-direction: row-reverse;
+}
+
+.controller input[type=range][orient=vertical] {
+  width: 8px;
+  height: 100%;
+}

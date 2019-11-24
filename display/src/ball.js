@@ -2,7 +2,7 @@ import { radians, map, limit } from "./util";
 import { gameScreen } from "./main";
 
 export class Ball {
-  constructor(x = 0, y = 0, angle = radians(30)) {
+  constructor(x = 0, y = 0, angle = radians(0)) {
     // Punto di riferimento centrale
     this.x = x;
     this.y = y;
