@@ -110,6 +110,7 @@ socket.on('movePaddle', ({ side, position }) => {
 });
 
 socket.on('endGame', () => {
+  gameStatus.lastWinner = ''; // cancella la scritta piccola
   cancelGame();
 });
 
