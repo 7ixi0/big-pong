@@ -23,13 +23,22 @@ window.addEventListener('resize', () => resizeCanvas(ctx, gameScreen));
 resizeCanvas(ctx, gameScreen);
 
 // oggetti di gioco
-const leftPaddle = new Paddle(50, 50);
-const rightPaddle = new Paddle(gameScreen.width - 50, 50);
+const leftPaddle = new Paddle(50, gameScreen.height / 2);
+const rightPaddle = new Paddle(gameScreen.width - 50, gameScreen.height / 2);
 const ball = new Ball(gameScreen.width / 2, gameScreen.height / 2);
 const middleLine = new MiddleLine();
 
 const gameStatus = new GameStatus();
 const counter = new PointsCounter();
+
+function cancelGame() {
+  gameStatus.gameRuninng = false;
+  leftPaddle.y = gameScreen.height / 2;
+  rightPaddle.y = gameScreen.height / 2;
+
+  ball.reset();
+  counter.reset();
+}
 
 // loop per aggiornare lo stato di gioco
 function update() {
@@ -98,6 +107,10 @@ socket.on('movePaddle', ({ side, position }) => {
       rightPaddle.setPosition(pos);
       break;
   }
+});
+
+socket.on('endGame', () => {
+  cancelGame();
 });
 
 function gameLoop(time = 0) {

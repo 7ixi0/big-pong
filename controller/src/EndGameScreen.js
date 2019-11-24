@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const EndGameScreen = ({ side, data }) => {
   if (!data) return (
-    <p>Connessione interrota: la partita è stat cancellata</p>
+    <p>Connessione interrota: la partita è stata cancellata</p>
   );
 
   console.log(data);

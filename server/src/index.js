@@ -7,15 +7,8 @@ gameQueue.on('newPlayer', () => console.log(`${gameQueue.lenght} giocatori in co
 // se la partita è terminata con un vincitore, data ha questa forma
 // { winner: 'right', leftPoints: 2, rightPoints: 3 }
 // se la partita è stata cancellata data ha questa forma: {}
-const endGame = (data = {}) => {
+const endGame = (data) => {
   io.to('playing').emit('endGame', data);
-  io.to('playing').clients((err, clients) => {
-    if (err) return;
-    clients.forEach(id => {
-      const client = io.sockets.connected[id];
-      if (client) client.disconnect(true);
-    });
-  });
   gameQueue.endGame();
 };
 
@@ -60,8 +53,6 @@ gameQueue.on('gameReady', ([player1, player2]) => {
     player.join('playing');
   };
 
-  const leave = player => player.disconnect(true);
-
   /*
   pacchetto per spostare una paletta
   formato: { side: 'left', position: 0.35 }
@@ -76,9 +67,9 @@ gameQueue.on('gameReady', ([player1, player2]) => {
     });
 
   const abort = () => {
-    leave(player1);
-    leave(player2);
+    endGame();
     gameQueue.endGame();
+    io.to('display').emit('endGame');
   };
 
   const setup = (player, side) => {
