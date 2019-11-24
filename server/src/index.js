@@ -5,7 +5,7 @@ const gameQueue = new GameQueue(io);
 gameQueue.on('newPlayer', () => console.log(`${gameQueue.lenght} giocatori connessi`));
 
 const endGame = (data) => {
-  io.to('playing').volatile.emit('endGame', data);
+  io.to('playing').emit('endGame', data);
   io.to('playing').clients((err, clients) => {
     if (err) return;
     clients.forEach(id => {
