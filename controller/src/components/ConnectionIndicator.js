@@ -1,6 +1,7 @@
 import React from 'react';
 import { socket } from '../socket';
 import { useInterval } from '../hooks/useInterval';
+import '../styles/connection-indicator.css';
 
 export const ConnectionIndicator = () => {
   const [connected, setConnected] = React.useState(socket.connected);
@@ -12,8 +13,10 @@ export const ConnectionIndicator = () => {
   }, 500);
 
   return (
-    <p style={{ color: connected ? 'green' : 'red' }}>
-      {'\u25CF\u0020'}{connected ? 'connesso' : 'non connesso'}
-    </p>
+    <div className={`connection-indicator ${connected ? 'connected' : 'not-connected'}`}>
+      <p>
+        {connected ? 'connesso' : 'non connesso'}
+      </p>
+    </div>
   );
 };

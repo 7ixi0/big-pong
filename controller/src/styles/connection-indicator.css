@@ -1,0 +1,27 @@
+.connection-indicator {
+  max-width: 100%;
+
+  border: 2px solid black;
+  border-radius: 50px;
+
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.connection-indicator p {
+  margin: 0;
+  padding: 0.25em;
+  font-size: 1.5em;
+}
+
+.connection-indicator.connected {
+  color: white;
+  background-color: rgba(0, 128, 0, 0.5);
+}
+
+.connection-indicator.not-connected {
+  color: white;
+  background-color: rgba(128, 0, 0, 0.5);
+}
