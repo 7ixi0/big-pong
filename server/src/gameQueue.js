@@ -71,7 +71,7 @@ module.exports = class GameQueue extends EventEmitter {
     }
   }
 
-  get lenght() {
+  get length() {
     return this.q.length;
   }
 

@@ -2,7 +2,15 @@ const io = require('socket.io')();
 const GameQueue = require('./gameQueue');
 
 const gameQueue = new GameQueue(io);
-gameQueue.on('newPlayer', () => console.log(`${gameQueue.lenght} giocatori in coda`));
+gameQueue.on('newPlayer', () => {
+  gameQueue.q.forEach((id, i) => {
+    const socket = io.sockets.connected[id];
+    if (!socket) return;
+
+    socket.emit('queueInfo', { position: i, length: gameQueue.length });
+  });
+  console.log(`${gameQueue.length} giocatori in coda`);
+});
 
 // se la partita è terminata con un vincitore, data ha questa forma
 // { winner: 'right', leftPoints: 2, rightPoints: 3 }

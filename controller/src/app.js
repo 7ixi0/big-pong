@@ -3,6 +3,7 @@ import { ControllerScreen } from './ControllerScreen';
 import { ConnectionIndicator } from './ConnectionIndicator';
 import { socket } from './socket';
 import { EndGameScreen } from './EndGameScreen';
+import { WaitingScreen } from './WaitingScreen';
 
 export const App = () => {
   const [game, setGame] = React.useState({ status: 'waiting', side: '', endGameData: {} });
@@ -33,12 +34,7 @@ export const App = () => {
 
   switch (game.status) {
     case 'waiting':
-      return (
-        <React.Fragment>
-          <ConnectionIndicator />
-          <p>In coda per entrare in partita...</p>
-        </React.Fragment>
-      );
+      return <WaitingScreen />;
 
     case 'playing':
       return (
