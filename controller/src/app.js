@@ -1,8 +1,8 @@
 import React from 'react';
 import { socket } from './socket';
-import { WaitingScreen } from './WaitingScreen';
-import { ControllerScreen } from './ControllerScreen';
-import { EndGameScreen } from './EndGameScreen';
+import { WaitingScreen } from './screens/WaitingScreen';
+import { ControllerScreen } from './screens/ControllerScreen';
+import { EndGameScreen } from './screens/EndGameScreen';
 
 export const App = () => {
   const [game, setGame] = React.useState({ status: 'waiting', side: '', endGameData: {} });

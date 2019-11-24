@@ -1,5 +1,5 @@
 import React from 'react';
-import { socket } from './socket';
+import { socket } from '../socket';
 
 export const QueueInfo = () => {
   const [data, setData] = React.useState({ length: 0, position: 0 });

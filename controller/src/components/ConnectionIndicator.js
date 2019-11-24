@@ -1,6 +1,6 @@
 import React from 'react';
-import { socket } from './socket';
-import { useInterval } from './hooks/useInterval';
+import { socket } from '../socket';
+import { useInterval } from '../hooks/useInterval';
 
 export const ConnectionIndicator = () => {
   const [connected, setConnected] = React.useState(socket.connected);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConnectionIndicator } from './ConnectionIndicator';
-import { Controller } from './Controller';
+import { ConnectionIndicator } from '../components/ConnectionIndicator';
+import { Controller } from '../components/Controller';
 
 export const ControllerScreen = ({ side }) => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map } from './util';
-import { socket } from './socket';
-import { useInterval } from './hooks/useInterval';
+import { map } from '../util';
+import { socket } from '../socket';
+import { useInterval } from '../hooks/useInterval';
 
 export const Controller = ({ side }) => {
   const [value, setValue] = React.useState(50);
