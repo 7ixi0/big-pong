@@ -3,17 +3,15 @@ import { socket } from './socket';
 
 export const ConnectionIndicator = () => {
   const [connected, setConnected] = React.useState(socket.connected);
-  const setOnline = () => setConnected(true);
-  const setOffline = () => setConnected(false);
 
   React.useEffect(() => {
-    socket.on('connect', setOnline);
-    socket.on('disconnect', setOffline);
+    const interval = setInterval(() => {
+      // Uso un if per evitare di triggerare un re-render ogni mezzo secondo
+      if (socket.connected !== connected)
+        setConnected(socket.connected);
+    }, 500);
 
-    return () => {
-      socket.off('connect', setOnline);
-      socket.off('disconnect', setOffline);
-    };
+    return () => clearInterval(interval);
   });
 
   return (
