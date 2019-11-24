@@ -7,7 +7,6 @@ export const WaitingScreen = () => {
     <React.Fragment>
       <ConnectionIndicator />
       <QueueInfo />
-      <p>In coda per entrare in partita...</p>
     </React.Fragment>
   );
 };

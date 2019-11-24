@@ -1,5 +1,6 @@
 import React from 'react';
 import { socket } from '../socket';
+import '../styles/queue-info.css';
 
 export const QueueInfo = () => {
   const [data, setData] = React.useState({ length: 0, position: 0 });
@@ -12,9 +13,9 @@ export const QueueInfo = () => {
 
   const { position } = data;
   return (
-    <React.Fragment>
-      <p>Posizione in coda: {position + 1}</p>
-      {position < 1 && <p>Sarai nella prossima partita</p>}
-    </React.Fragment>
+    <div className="queue-info-container">
+      <p className="queue-postion">Posizione in coda: {position + 1}</p>
+      {position < 1 && <p className="in-next-game">Sarai nella prossima partita</p>}
+    </div>
   );
 };

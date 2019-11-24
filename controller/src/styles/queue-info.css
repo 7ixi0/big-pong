@@ -1,0 +1,17 @@
+.queue-info-container {
+  margin: 2em 0;
+}
+
+.queue-info-container p {
+  margin: 0;
+  padding: 0.25em;
+}
+
+.queue-info-container p.queue-postion {
+  font-size: 2em;
+}
+
+.queue-info-container p.in-next-game {
+  color: green;
+  font-weight: bold;
+}
