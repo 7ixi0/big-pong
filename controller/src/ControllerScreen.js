@@ -14,10 +14,7 @@ export const ControllerScreen = ({ side }) => {
       lastValue = value;
 
       const position = map(value, 0, 100, 1, 0);
-      socket.emit('movePaddle', {
-        side,
-        position,
-      });
+      socket.emit('movePaddle', { position });
     }, 5);
 
     return () => clearInterval(interval);
@@ -25,6 +22,7 @@ export const ControllerScreen = ({ side }) => {
 
   return (
     <React.Fragment>
+      <p>Lato: {side === 'left' ? 'sinistro' : 'destro'}</p>
       <input
         type="range"
         min={0}

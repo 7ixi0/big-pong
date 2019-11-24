@@ -67,9 +67,9 @@ gameQueue.on('gameReady', ([player1, player2]) => {
   */
 
   // inoltra i pacchetti dai controller al display
-  const fowardPackets = socket =>
-    socket.on('movePaddle', (data) => {
-      io.to('display').volatile.emit('movePaddle', data);
+  const fowardPackets = (socket, side) =>
+    socket.on('movePaddle', ({ position }) => {
+      io.to('display').volatile.emit('movePaddle', { side, position });
     });
 
   const abort = () => {
@@ -78,17 +78,18 @@ gameQueue.on('gameReady', ([player1, player2]) => {
     gameQueue.endGame();
   };
 
-  const setup = player => {
+  const setup = (player, side) => {
     join(player);
-    fowardPackets(player);
+    fowardPackets(player, side);
+    player.emit('startGame', { side });
     player.on('disconnect', () => {
       console.log('Un giocatore ha abbandonato. Termino partita.');
       abort();
     });
   }
 
-  setup(player1);
-  setup(player2);
+  setup(player1, 'left');
+  setup(player2, 'right');
   io.to('display').emit('startGame');
 });
 
