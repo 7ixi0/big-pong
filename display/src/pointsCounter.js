@@ -30,14 +30,15 @@ export class PointsCounter {
     if (!winner) return;
 
     console.log('vittoria', winner);
-    this.reset();
-    return {
+    const winData = {
       winner,
       points: {
         left: this.leftPoints,
         right: this.rightPoints,
       },
     };
+    this.reset();
+    return winData;
   }
 
   render(ctx) {

@@ -4,7 +4,10 @@ const GameQueue = require('./gameQueue');
 const gameQueue = new GameQueue(io);
 gameQueue.on('newPlayer', () => console.log(`${gameQueue.lenght} giocatori in coda`));
 
-const endGame = (data) => {
+// se la partita è terminata con un vincitore, data ha questa forma
+// { winner: 'right', leftPoints: 2, rightPoints: 3 }
+// se la partita è stata cancellata data ha questa forma: {}
+const endGame = (data = {}) => {
   io.to('playing').emit('endGame', data);
   io.to('playing').clients((err, clients) => {
     if (err) return;

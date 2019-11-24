@@ -2,15 +2,20 @@ import React from 'react';
 import { ControllerScreen } from './ControllerScreen';
 import { ConnectionIndicator } from './ConnectionIndicator';
 import { socket } from './socket';
+import { EndGameScreen } from './EndGameScreen';
 
 export const App = () => {
   const [side, setSide] = React.useState('');
   const [gameStatus, setGameStatus] = React.useState('waiting');
+  const [endGameData, setEndGameData] = React.useState({});
   const startGame = ({ side }) => {
     setSide(side);
     setGameStatus('playing');
   };
-  const endGame = () => setGameStatus('end');
+  const endGame = data => {
+    setEndGameData(data);
+    setGameStatus('end');
+  };
 
   React.useEffect(() => {
     socket.on('startGame', startGame);
@@ -43,7 +48,10 @@ export const App = () => {
 
     case 'end':
       return (
-        <p>Gioco  terminato</p>
+        <EndGameScreen
+          side={side}
+          data={endGameData}
+        />
       );
   }
 };

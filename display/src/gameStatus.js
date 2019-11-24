@@ -15,16 +15,9 @@ export class GameStatus {
     this.gameRuninng = true;
   }
 
-  endGame({ winner, leftPoints, rightPoints }) {
+  endGame({ winner, points }) {
     this.gameRuninng = false;
     this.lastWinner = winner;
-
-    socket.emit('endGame', {
-      winner,
-      points: {
-        left: leftPoints,
-        right: rightPoints,
-      },
-    });
+    socket.emit('endGame', { winner, points });
   }
 }
