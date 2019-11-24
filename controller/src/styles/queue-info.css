@@ -12,6 +12,6 @@
 }
 
 .queue-info-container p.in-next-game {
-  color: green;
+  color: lightgreen;
   font-weight: bold;
 }
