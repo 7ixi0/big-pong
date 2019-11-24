@@ -5,17 +5,21 @@ import { socket } from './socket';
 import { EndGameScreen } from './EndGameScreen';
 
 export const App = () => {
-  const [side, setSide] = React.useState('');
-  const [gameStatus, setGameStatus] = React.useState('waiting');
-  const [endGameData, setEndGameData] = React.useState({});
-  const startGame = ({ side }) => {
-    setSide(side);
-    setGameStatus('playing');
-  };
-  const endGame = data => {
-    setEndGameData(data);
-    setGameStatus('end');
-  };
+  const [game, setGame] = React.useState({ status: 'waiting', side: '', endGameData: {} });
+
+  const startGame = ({ side }) =>
+    setGame({
+      ...game,
+      status: 'playing',
+      side,
+    });
+
+  const endGame = data =>
+    setGame({
+      ...game,
+      status: 'end',
+      endGameData: data,
+    });
 
   React.useEffect(() => {
     socket.on('startGame', startGame);
@@ -27,7 +31,7 @@ export const App = () => {
     };
   });
 
-  switch (gameStatus) {
+  switch (game.status) {
     case 'waiting':
       return (
         <React.Fragment>
@@ -41,7 +45,7 @@ export const App = () => {
         <React.Fragment>
           <ConnectionIndicator />
           <ControllerScreen
-            side={side}
+            side={game.side}
           />
         </React.Fragment>
       );
@@ -49,8 +53,8 @@ export const App = () => {
     case 'end':
       return (
         <EndGameScreen
-          side={side}
-          data={endGameData}
+          side={game.side}
+          data={game.endGameData}
         />
       );
   }
