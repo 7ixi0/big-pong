@@ -1,9 +1,8 @@
 import React from 'react';
-import { ControllerScreen } from './ControllerScreen';
-import { ConnectionIndicator } from './ConnectionIndicator';
 import { socket } from './socket';
-import { EndGameScreen } from './EndGameScreen';
 import { WaitingScreen } from './WaitingScreen';
+import { ControllerScreen } from './ControllerScreen';
+import { EndGameScreen } from './EndGameScreen';
 
 export const App = () => {
   const [game, setGame] = React.useState({ status: 'waiting', side: '', endGameData: {} });
@@ -38,12 +37,9 @@ export const App = () => {
 
     case 'playing':
       return (
-        <React.Fragment>
-          <ConnectionIndicator />
-          <ControllerScreen
-            side={game.side}
-          />
-        </React.Fragment>
+        <ControllerScreen
+          side={game.side}
+        />
       );
 
     case 'end':
