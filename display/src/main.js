@@ -84,7 +84,7 @@ function render() {
     ctx.fillText('NON CONNESSO!', gameScreen.width / 2, gameScreen.height / 2);
   } else if (!gameStatus.gameRuninng) {
     ctx.fillStyle = '#0DD';
-    ctx.fillText('Attesa di giocatori', gameScreen.width / 2, gameScreen.height / 2);
+    ctx.fillText('Attendo giocatori', gameScreen.width / 2, gameScreen.height / 2);
 
     if (gameStatus.lastWinner) {
       const side = gameStatus.lastWinner === 'left' ? 'sinistra' : 'destra';
