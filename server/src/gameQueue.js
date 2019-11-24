@@ -21,10 +21,10 @@ module.exports = class GameQueue extends EventEmitter {
   }
 
   matchmaking() {
+    if (this.gameRunning) return;
+
     const players = this.getPlayers(2);
     if (!!players) {
-      if (this.gameRunning) return;
-
       this.gameRunning = true;
       this.emit('gameReady', players);
     }

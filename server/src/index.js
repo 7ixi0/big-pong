@@ -2,7 +2,7 @@ const io = require('socket.io')();
 const GameQueue = require('./gameQueue');
 
 const gameQueue = new GameQueue(io);
-gameQueue.on('newPlayer', () => console.log(`${gameQueue.lenght} giocatori connessi`));
+gameQueue.on('newPlayer', () => console.log(`${gameQueue.lenght} giocatori in coda`));
 
 const endGame = (data) => {
   io.to('playing').emit('endGame', data);
