@@ -7,7 +7,6 @@ export const EndGameScreen = ({ side, data }) => {
     <p>Connessione interrota: la partita è stata cancellata</p>
   );
 
-  console.log(data);
   const { winner, points } = data;
   return (
     <>

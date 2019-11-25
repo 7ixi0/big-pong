@@ -96,7 +96,6 @@ function render() {
 }
 
 socket.on('movePaddle', ({ side, position }) => {
-  console.log('ricevuta posizione', side, position);
   const pos = map(position, 0, 1, paddleSize.h / 2, gameScreen.height - paddleSize.h / 2);
   switch (side) {
     case 'left':
