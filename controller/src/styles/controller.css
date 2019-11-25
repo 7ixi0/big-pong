@@ -1,9 +1,3 @@
-/* gira lo slider in verticale */
-input[type=range][orient=vertical] {
-  writing-mode: bt-lr; /* IE */
-  -webkit-appearance: slider-vertical; /* WebKit */
-}
-
 p.controller-side {
   font-size: 2em;
   margin: 0;
@@ -25,19 +19,21 @@ p.controller-side.right {
   width: 100%;
   height: 70%;
 
-  display: flex;
-  align-items: center;
+  background-color: black;
+  color: white;
 }
 
-.controller.left {
-  flex-direction: row;
+.controller .controller-paddle {
+  height: 150px;
+  width: 50px;
+  margin: 0 25px;
+  background-color: white;
 }
 
-.controller.right {
-  flex-direction: row-reverse;
+.controller.left .controller-paddle {
+  float: left;
 }
 
-.controller input[type=range][orient=vertical] {
-  width: 8px;
-  height: 100%;
+.controller.right .controller-paddle {
+  float: right;
 }
