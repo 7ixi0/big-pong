@@ -4,9 +4,9 @@ import { ConnectionIndicator } from '../components/ConnectionIndicator';
 
 export const WaitingScreen = () => {
   return (
-    <React.Fragment>
+    <>
       <ConnectionIndicator />
       <QueueInfo />
-    </React.Fragment>
+    </>
   );
 };

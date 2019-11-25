@@ -10,7 +10,7 @@ export const EndGameScreen = ({ side, data }) => {
   console.log(data);
   const { winner, points } = data;
   return (
-    <React.Fragment>
+    <>
       <p className={`game-result ${side === winner ? 'win' : 'lose'}`}>
         Hai {side === data.winner ? 'vinto' : 'perso'}
       </p>
@@ -20,7 +20,7 @@ export const EndGameScreen = ({ side, data }) => {
       <p className="bottom-text">
         Ricarica la pagina per fare un'altra partita
       </p>
-    </React.Fragment>
+    </>
   );
 };
 

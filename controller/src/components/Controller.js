@@ -40,7 +40,7 @@ export const Controller = ({ side }) => {
   }, 5);
 
   return (
-    <React.Fragment>
+    <>
       <p className={`controller-side ${side}`}>
         LATO {side === 'left' ? 'SINISTRO' : 'DESTRO'}
       </p>
@@ -55,7 +55,7 @@ export const Controller = ({ side }) => {
           <div className="controller-paddle" />
         </Draggable>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

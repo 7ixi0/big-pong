@@ -5,12 +5,12 @@ import { Controller } from '../components/Controller';
 
 export const ControllerScreen = ({ side }) => {
   return (
-    <React.Fragment>
+    <>
       <ConnectionIndicator />
       <Controller
         side={side}
       />
-    </React.Fragment>
+    </>
   );
 }
 
