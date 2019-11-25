@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/end-screen.css';
 
 export const EndGameScreen = ({ side, data }) => {
   if (!data) return (
@@ -10,10 +11,15 @@ export const EndGameScreen = ({ side, data }) => {
   const { winner, points } = data;
   return (
     <React.Fragment>
-      <p style={{ color: side === winner ? 'green' : 'red' }}>
+      <p className={`game-result ${side === winner ? 'win' : 'lose'}`}>
         Hai {side === data.winner ? 'vinto' : 'perso'}
       </p>
-      <p>{points.left} - {points.right}</p>
+      <p className="points">
+        {points.left} - {points.right}
+      </p>
+      <p className="bottom-text">
+        Ricarica la pagina per fare un'altra partita
+      </p>
     </React.Fragment>
   );
 };
