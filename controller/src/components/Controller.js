@@ -30,7 +30,7 @@ export const Controller = ({ side }) => {
   // Questa roba con le variabili va contro tutte le good practices di React,
   // però è il modo più performante che ho trovato quindi andrà bene così
   let value = 0;
-  let lastValue = 0;
+  let lastValue = 1;
   useInterval(() => {
     if (value === lastValue) return;
     lastValue = value;
